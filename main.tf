@@ -19,10 +19,16 @@ provider "aws" {
 module "aws_s3" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
-  bucket = "new-test-humanitec-23409832489734"
+  // Generate randome bucket name
+  bucket = "ht-bucket-${random_string.s3_bucket_name.result}"
   acl    = "private"
 }
 
+resource "random_string" "s3_bucket_name" {
+  length  = 8
+  special = false
+  lower = true
+}
 
 variable "credentials" {
   description = "The credentials for connecting to AWS."
@@ -40,14 +46,4 @@ output "region" {
 
 output "bucket" {
   value = module.aws_s3.s3_bucket_bucket_domain_name
-}
-
-output "aws_access_key_id" {
-  value     = var.credentials.access_key
-  sensitive = true
-}
-
-output "aws_secret_access_key" {
-  value     = var.credentials.secret_key
-  sensitive = true
 }
