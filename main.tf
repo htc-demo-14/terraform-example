@@ -20,14 +20,13 @@ module "aws_s3" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
   // Generate randome bucket name
-  bucket = "ht-bucket-${random_string.s3_bucket_name.result}"
+  bucket = "ht-bucket-${lower(random_string.s3_bucket_name.result)}"
   acl    = "private"
 }
 
 resource "random_string" "s3_bucket_name" {
   length  = 8
   special = false
-  lower = true
 }
 
 variable "credentials" {
