@@ -37,8 +37,7 @@ variable "credentials" {
   })
   sensitive = true
 }
-  
-  
+
 output "region" {
   value = module.aws_s3.s3_bucket_region
 }
