@@ -21,7 +21,6 @@ module "aws_s3" {
 
   // Generate randome bucket name
   bucket = "ht-bucket-${lower(random_string.s3_bucket_name.result)}"
-  acl    = "private"
 }
 
 resource "random_string" "s3_bucket_name" {
