@@ -20,7 +20,7 @@ module "aws_s3" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
   // Generate randome bucket name
-  bucket = "${var.app_name}-${var.bucket_id}"
+  bucket = "${replace(replace(lower("${var.app_name}-${split(".", var.bucket_id)[3]}"), " ", "_"), ".", "_")}"
 
 }
 
