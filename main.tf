@@ -20,7 +20,7 @@ module "aws_s3" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
   // Generate randome bucket name
-  bucket = var.bucket_name
+  bucket = "${var.app_name}-${var.bucket_id}"
 
 }
 
@@ -38,7 +38,8 @@ variable "credentials" {
   sensitive = true
 }
 
-variable "bucket_name" {}
+variable "app_name" {}
+variable "bucket_id" {}
 
 output "region" {
   value = module.aws_s3.s3_bucket_region
